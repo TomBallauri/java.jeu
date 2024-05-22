@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.container {
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.control{
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    border: black 2px solid;
+    background-color: white;
+    top: 5rem;
+    left: 5rem;
+}
+x
+#js_timer {
+    position: absolute;
+    z-index: 999;
+    text-align: center;
+    overflow: visible;
+    
+}
+
+#timer {
+    position: absolute;
+    width: 10rem;
+    height: 3.8rem;
+    left: 75rem;
+    top: 2rem;
+    font-size: 55px;
+    z-index: 999;
+    background: #fff;
+    border: solid black 2px;
+    color: #000;
+    overflow: visible;
+}
+
+.controle{
+    z-index: 1;
+    position: absolute;
+    border: 5px solid black;
+    background-color: white;
+    top: 2rem;
+    left: 11.5rem;
+}
+
+.box {
+    position: absolute ;
+    z-index: 1;
+    width: 100px;
+    height: 100px;
+    background-color: black;
+    margin: 10px;
+    color: white;
+    text-align: center;
+    border-radius: 1.5rem;
+    border: white 1px solid;
+  }
+
+  #z {
+    top: 6rem;
+    left: 12rem;
+  }
+
+  #q{
+    top: 12.5rem;
+    left: 5.5rem;
+  }
+
+  #s{
+    top: 12.5rem;
+    left: 12rem;
+  }
+
+  #d {
+    top: 12.5rem;
+    left: 18.5rem;
+  }
+
+  #space {
+    width: 25rem;
+    top: 21rem;
+    left: 3rem;
+  }
+
+  #space h1 {
+    transform: translateY(25px); /* Ajustez la valeur pour déplacer le contenu vers le bas */
+  }
+
+  #arrowup{
+    top: 29rem;
+    left: 12rem;
+  }
+
+  #arrowdown{
+    top: 35.5rem;
+    left: 12rem;
+  }
+  #arrowleft{
+    top: 35.5rem;
+    left: 5.5rem;
+  }
+
+  #arrowright{
+    top: 35.5rem;
+    left: 18.5rem;
+  }
+
