@@ -667,6 +667,7 @@ html, body {
     width: 50%;
     height: 400px;
     background: linear-gradient(0deg, black, rgb(48,47,47));
+    border-radius: 1.5rem;
     z-index: 3;
   }
 
@@ -699,3 +700,49 @@ html, body {
   .glow::after{
     filter: blur(40px);
   }
+
+.Lancement {
+    position: relative;
+    display: inline-block;
+    font-size: 35px;
+    border-radius: 1.5rem;
+    color: white;
+    cursor: pointer;
+    padding: 10px 20px;
+    overflow: hidden;
+    border: none;
+    background: none; /* Suppression du fond de l'élément principal */
+    transform: translate(-25rem, 17.5rem);
+}
+
+.Lancement::before,
+.Lancement::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    border-radius: 1.5rem;
+    transition: opacity 1.5s ease;
+}
+
+.Lancement::before {
+    background: linear-gradient(150deg, rgba(199,199,199,1) 0%, rgba(199,199,199,1) 22%, rgba(0,0,0,1) 100%);
+    opacity: 1;
+}
+
+.Lancement::after {
+    background: linear-gradient(150deg, rgba(0,0,0,1) 0%, rgba(199,199,199,1) 78%, rgba(255,255,255,1) 100%);
+    opacity: 0;
+}
+
+.Lancement:hover::before {
+    opacity: 0;
+}
+
+.Lancement:hover::after {
+    opacity: 1;
+}
+
