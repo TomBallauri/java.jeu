@@ -9,11 +9,7 @@ export default class Enemy {
       this.image = new Image();
       this.image.src = imageUrl;  
     }
-  
-  
-  
-  
-  
+
     draw(ctx) {
       ctx.fillStyle = this.image  
       if (this.health > 1) {

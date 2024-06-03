@@ -9,6 +9,8 @@ canvas.width = 550;
 canvas.height = 600;
 
 const bulletController = new BulletController(canvas);
+
+
 const player = new Player(
   canvas.width / 2.2,
   canvas.height / 1.3,
@@ -19,7 +21,7 @@ let enemies = [];
 
 // Charger l'image de fond
 const backgroundImage = new Image();
-backgroundImage.src = 'assets/satore.jpg'; // Remplacez par le chemin de votre image
+backgroundImage.src = "../assets/satore.jpg"; // Remplacez par le chemin de votre image
 
 // Fonction pour générer un ennemi aléatoire
 function createRandomEnemy() {
@@ -28,7 +30,7 @@ function createRandomEnemy() {
   const colors = ["green", "red", "gold"];
   const color = colors[Math.floor(Math.random() * colors.length)];
   const health = Math.floor(Math.random() * 5) + 1; 
-  return new Enemy(x, y, color, health, 'assets/satore.jpg');
+  return new Enemy(x, y, color, health, "../assets/satore.jpg");
 }
 
 function addEnemyPeriodically() {
@@ -39,6 +41,7 @@ function addEnemyPeriodically() {
   }, 1500);
 }
 
+
 function gameLoop() {
   setCommonStyle();
   
@@ -48,6 +51,10 @@ function gameLoop() {
   bulletController.draw(ctx);
   player.draw(ctx);
   player.keepInBounds(canvas.width, canvas.height);
+  
+
+
+  
 
   // Mettre à jour et dessiner les ennemis
   enemies.forEach((enemy, index) => {
@@ -59,11 +66,28 @@ function gameLoop() {
     } else {
       enemy.draw(ctx);
     }
+
+
+    if (
+      Math.round(player.x) < Math.round(enemies[index].x) + enemies[index].width &&
+      Math.round(player.x) + player.width > Math.round(enemies[index].x) &&
+      Math.round(player.y) < Math.round(enemies[index].y) + enemies[index].height &&
+      Math.round(player.y) + player.height > Math.round(enemies[index].y)) {
+      return true;
+      console.log("toucher")
+        }else{
+    return false;
+    console.log("pas toucher")
+      }
+
   });
 
   // Supprimer les ennemis qui sortent de l'écran
   enemies = enemies.filter(enemy => enemy.y <= canvas.height);
+
 }
+
+
 
 function setCommonStyle() {
 }
@@ -107,3 +131,5 @@ var ele = document.getElementById('timer');
 
 setInterval(gameLoop, 1000 / 60);
 addEnemyPeriodically();
+console.log(enemies.x)
+console.log(enemies.y)

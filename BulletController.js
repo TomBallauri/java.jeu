@@ -33,6 +33,8 @@ export default class BulletController {
       if (bullet.collideWith(sprite)) {
         this.bullets.splice(this.bullets.indexOf(bullet), 1);
         return true;
+
+
       }
       return false;
     });

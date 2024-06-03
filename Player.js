@@ -7,7 +7,7 @@ export default class Player {
     this.height = 50;
     this.speed = 4;
     this.image = new Image();
-    this.image.src = 'assets/satore.jpg';
+    this.image.src = '../assets/satore.jpg';
 
     document.addEventListener("keydown", this.keydown);
     document.addEventListener("keyup", this.keyup);
@@ -47,6 +47,9 @@ export default class Player {
       }
     }
   
+  
+    
+
     keepInBounds(canvasWidth, canvasHeight) {
       if (this.x < 0) {
         this.x = 0;
@@ -124,7 +127,10 @@ export default class Player {
     };
   }
 
-  
+let vxr
+let vxl
+let vyu
+let vyd
 
 addEventListener("keyup", function(e){
     if (e.code == 'KeyD') vxr = 0;
