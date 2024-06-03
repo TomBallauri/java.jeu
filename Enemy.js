@@ -1,5 +1,5 @@
 export default class Enemy {
-  constructor(x, y, color,health) {
+  constructor(x, y, color, health, imageUrl) {
     this.x = x;
     this.y = y;
     this.color = color;
@@ -7,18 +7,16 @@ export default class Enemy {
     this.width = 50;
     this.height = 50;
     this.speed = 1.5;
+    this.image = new Image();
+    this.image.src = imageUrl;
   }
 
-  draw(ctx) {
-    ctx.fillStyle = this.color;
-    if (this.health > 1) {
-      ctx.strokeStyle = "white";
-    } else {
-      ctx.strokeStyle = this.color;
-      ctx.strokeStyle = this.image;
-    }
-    ctx.fillRect(this.x, this.y, this.width, this.height);
-    ctx.strokeRect(this.x, this.y, this.width, this.height);
+  draw(ctx) { 
+    // Dessiner l'image de l'ennemi
+    ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+  
+
+    // Afficher la santé de l'ennemi
     ctx.fillStyle = "black";
     ctx.font = "25px Arial";
     ctx.fillText(
@@ -38,8 +36,5 @@ export default class Enemy {
       this.y = -this.height;
       this.x = Math.random() * (canvasWidth - this.width);
     }
-    }
-      
   }
-
-
+}

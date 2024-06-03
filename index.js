@@ -15,49 +15,95 @@ const player = new Player(
   bulletController
 );
 
-const enemies = [
-  new Enemy(50, 20, "green", 5),
-  new Enemy(150, 20, "red", 5),
-  new Enemy(250, 20, "gold", 2),
-  new Enemy(350, 20, "green", 2),
-  new Enemy(450, 20, "gold", 10),
-  new Enemy(50, 100, "green", 5),
-  new Enemy(150, 100, "red", 5),
-  new Enemy(250, 100, "gold", 2),
-  new Enemy(350, 100, "green", 2),
-  new Enemy(450, 100, "gold", 20),
-];
+let enemies = [];
+
+// Charger l'image de fond
+const backgroundImage = new Image();
+backgroundImage.src = 'assets/satore.jpg'; // Remplacez par le chemin de votre image
+
+// Fonction pour générer un ennemi aléatoire
+function createRandomEnemy() {
+  const x = Math.random() * (canvas.width - 50);
+  const y = Math.random() * 50 - 50; 
+  const colors = ["green", "red", "gold"];
+  const color = colors[Math.floor(Math.random() * colors.length)];
+  const health = Math.floor(Math.random() * 5) + 1; 
+  return new Enemy(x, y, color, health, 'assets/satore.jpg');
+}
+
+function addEnemyPeriodically() {
+  setInterval(() => {
+    if (enemies.length < 5) { 
+      enemies.push(createRandomEnemy());
+    }
+  }, 1500);
+}
 
 function gameLoop() {
   setCommonStyle();
-  ctx.fillStyle = "black";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  
+  // Dessiner l'image de fond
+  ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+
   bulletController.draw(ctx);
   player.draw(ctx);
   player.keepInBounds(canvas.width, canvas.height);
-  if (enemies.length < 4) {
-    enemies.push(createRandomEnemy());
-  }
 
-
-
-    enemies.forEach((enemy, index) => {
-      enemy.move(canvas.height, canvas.width);
-      if (bulletController.collideWith(enemy)) {
-        if (enemy.health <= 0) {
-          enemies.splice(index, 1);
-        }
-      } else {
-        enemy.draw(ctx);
+  // Mettre à jour et dessiner les ennemis
+  enemies.forEach((enemy, index) => {
+    enemy.move(canvas.height, canvas.width);
+    if (bulletController.collideWith(enemy)) {
+      if (enemy.health <= 0) {
+        enemies.splice(index, 1);
       }
-});
+    } else {
+      enemy.draw(ctx);
+    }
+  });
+
+  // Supprimer les ennemis qui sortent de l'écran
+  enemies = enemies.filter(enemy => enemy.y <= canvas.height);
 }
 
 function setCommonStyle() {
-  ctx.shadowColor = "#d53";
-  ctx.shadowBlur = 20;
-  ctx.lineJoin = "bevel";
-  ctx.lineWidth = 5;
 }
 
+document.addEventListener("keydown", function(event) {
+  const key = event.key.toLowerCase();
+  const validKeys = ['z', 'q', 's', 'd', 'arrowup', 'arrowdown', 'arrowleft', 'arrowright'];
+
+  if (key === ' ') {
+    event.preventDefault(); // Empêche le défilement de la page lorsque la barre d'espace est utilisée
+    document.getElementById('space').style.backgroundColor = "yellow";
+  } else if (validKeys.includes(key)) {
+    event.preventDefault(); // Empêche le défilement de la page lors de l'utilisation des touches fléchées
+    document.getElementById(key).style.backgroundColor = "yellow";
+  }
+});
+
+document.addEventListener("keyup", function(event) {
+  const key = event.key.toLowerCase();
+  const validKeys = ['z', 'q', 's', 'd', 'arrowup', 'arrowdown', 'arrowleft', 'arrowright'];
+
+  if (key === ' ') {
+    document.getElementById('space').style.backgroundColor = "black";
+  } else if (validKeys.includes(key)) {
+    document.getElementById(key).style.backgroundColor = "black";
+  }
+});
+
+var timer;
+var ele = document.getElementById('timer');
+
+(function () {
+    var sec = 0;
+    timer = setInterval(() => {
+        var minutes = Math.floor(sec / 60);
+        var seconds = sec % 60;
+        ele.innerHTML = minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0');
+        sec++;
+    }, 1000);
+})();
+
 setInterval(gameLoop, 1000 / 60);
+addEnemyPeriodically();

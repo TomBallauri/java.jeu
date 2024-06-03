@@ -6,6 +6,8 @@ export default class Player {
     this.width = 50;
     this.height = 50;
     this.speed = 4;
+    this.image = new Image();
+    this.image.src = 'assets/satore.jpg';
 
     document.addEventListener("keydown", this.keydown);
     document.addEventListener("keyup", this.keyup);
@@ -13,10 +15,8 @@ export default class Player {
 
   draw(ctx) {
     this.move();
-    ctx.strokeStyle = "yellow";
     ctx.strokeRect(this.x, this.y, this.width, this.height);
-    ctx.fillStyle = "black";
-    ctx.fillRect(this.x, this.y, this.width, this.height);
+    ctx.drawImage(this.image,this.x, this.y, this.width, this.height )
     this.shoot();
   }
 
@@ -27,7 +27,7 @@ export default class Player {
       const damage = 1;
       const bulletX = this.x + this.width / 2;
       const bulletY = this.y;
-      this.bulletController.shoot(bulletX, bulletY, speed, damage, delay);
+      this.bulletController.shoot(bulletX, bulletY, speed, damage, delay, );
     }
   }
   
