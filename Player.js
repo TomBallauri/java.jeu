@@ -30,6 +30,7 @@ export default class Player {
       this.bulletController.shoot(bulletX, bulletY, speed, damage, delay, );
     }
   }
+
   
     move() {
       if (this.downPressed) {

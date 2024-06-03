@@ -42,6 +42,20 @@ function addEnemyPeriodically() {
 }
 
 
+
+function collision(joueur,bot,index){
+  if (
+    Math.round(joueur.x) < Math.round(bot[index].x) + Math.round(bot[index].width) &&
+    Math.round(joueur.x) + joueur.width > Math.round(bot[index].x) &&
+    Math.round(joueur.y) < Math.round(bot[index].y) + bot[index].height &&
+    Math.round(joueur.y) + joueur.height > Math.round(bot[index].y)) {
+    return true;
+    
+      }else{      
+    return false;
+    }
+}
+
 function gameLoop() {
   setCommonStyle();
   
@@ -67,18 +81,9 @@ function gameLoop() {
       enemy.draw(ctx);
     }
 
-
-    if (
-      Math.round(player.x) < Math.round(enemies[index].x) + enemies[index].width &&
-      Math.round(player.x) + player.width > Math.round(enemies[index].x) &&
-      Math.round(player.y) < Math.round(enemies[index].y) + enemies[index].height &&
-      Math.round(player.y) + player.height > Math.round(enemies[index].y)) {
-      return true;
-      console.log("toucher")
-        }else{
-    return false;
-    console.log("pas toucher")
-      }
+    collision(player,enemies,index)
+    
+    
 
   });
 
